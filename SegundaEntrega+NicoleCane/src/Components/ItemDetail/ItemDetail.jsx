@@ -1,9 +1,19 @@
+import { useCart } from "../../context/CartContext";
 import { ItemCount } from "../ItemCount/ItemCount";
 
-export const ItemDetail = ({ name,description, img, price, stock }) => {
+export const ItemDetail = ({id, name, category, description, img, price, stock }) => {
+
+  const {addItem} = useCart();
 
     const onAdd = (items) => {
-        alert(`Se agregaron ${items} al carrito`)
+        addItem (
+          id,
+          name,
+          img,
+          price,
+          category,
+          description
+        )
       }
 
   return (

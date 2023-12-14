@@ -1,10 +1,18 @@
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useCart } from "../../context/CartContext";
+import { Link } from "react-router-dom";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 export const CartWidget = () => {
+  const { totalQuantity } = useCart();
+
   return (
-    <div className="h-25">
-        <AiOutlineShoppingCart color="red" size={30}/>
-        <strong>2</strong>
-    </div>
-  )
-}
+    <Link to="/cart">
+      <div className="cart-widget">
+        <FontAwesomeIcon icon={faShoppingCart} />
+        <span className="cart-count">({totalQuantity})</span>
+      </div>
+    </Link>
+  );
+};

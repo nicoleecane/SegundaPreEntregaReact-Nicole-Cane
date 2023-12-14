@@ -15,20 +15,21 @@ export const NavBar = () => {
         <Link to="/">
           <button className="btn  btn-danger mx-2">Home</button>
         </Link>
-        <Link to="/category/temporada1">
+        <Link to={"/category/temporada1"}>
           <button className="btn btn-danger mx-2">Temporada 1</button>
         </Link>
-        <Link to="/category/temporada2">
+        <Link to={"/category/temporada2"}>
           <button className="btn btn-danger mx-2">Temporada 2</button>
         </Link>
-        <Link to="/category/temporada3">
+        <Link to={"/category/temporada3"}>
           <button className="btn btn-danger mx-2">Temporada 3</button>
         </Link>
-        <Link to="/category/temporada4">
+        <Link to={"/category/temporada4"}>
           <button className="btn btn-danger mx-2">Temporada 4</button>
         </Link>
+        
       </div>
-      <Link to="/Cart">
+      <Link to={"/Cart"}>
         <CartWidget/>
       </Link>
     </nav>
