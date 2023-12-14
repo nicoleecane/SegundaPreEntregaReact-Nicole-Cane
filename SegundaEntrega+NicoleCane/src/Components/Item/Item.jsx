@@ -28,15 +28,17 @@ export const Item = ({ id, name, img, description }) => {
           <h5 className="card-title">{name}</h5>
           <img src={img} width="90" alt="" />
           <p className="card-text"> {description} </p>
-         
-        </div>
-       
-      </div>
-      <Link to={`/item/${id}`}>
+          <Link to={`/item/${id}`}>
             <button className="btn btn-outline-danger detail_bg">
               Detalles
             </button>
           </Link>
+        </div>
+       
+      </div>
+      
     </div>
   );
 };
+
+

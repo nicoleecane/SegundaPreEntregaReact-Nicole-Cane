@@ -1,9 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-// Crea y exporta el contexto del carrito
-export const CartContext = createContext(null);
+export const CartContext = createContext();
 
-// Hook para utilizar el contexto del carrito
 export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {
@@ -12,98 +10,70 @@ export const useCart = () => {
   return context;
 };
 
-// Proveedor del contexto del carrito 
 export const CartContextProvider = ({ children }) => {
-  // Obtener los elementos del carrito almacenados en el localStorage 
   const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-
-  // Almacenar los elementos del carrito
   const [cartItems, setCartItems] = useState(storedCartItems);
-  // Total de todos los elementos del carrito
   const [totalCartItems, setTotalCartItems] = useState(0);
-  // Cantidad total de productos en el carrito
   const [totalQuantity, setTotalQuantity] = useState(0);
 
-  // Función para añadir un elemento al carrito o actualizar la cantidad si ya existe
-  const addItem = (item, quantity) => {
-    const { id, name, description, img, price } = item;
+  const addItem = (item) => {
+    const { id, quantity } = item;
     const index = cartItems.findIndex((product) => product.id === id);
 
     if (index !== -1) {
       const cartItemsCopy = [...cartItems];
-      cartItemsCopy[index].quantity += quantity;
+      cartItemsCopy[index].quantity += Number(quantity);
       cartItemsCopy[index].subTotal = cartItemsCopy[index].quantity * cartItemsCopy[index].price;
       setCartItems(cartItemsCopy);
     } else {
       const newItem = {
-        id,
-        name,
-        description,
-        img,
-        price,
-       
-        
-        quantity,
-        subTotal: quantity * price,
+        ...item,
+        quantity: Number(quantity),
+        subTotal: Number(quantity) * item.price,
       };
-
       setCartItems([...cartItems, newItem]);
     }
   };
 
-  // Función para eliminar un elemento del carrito
   const removeItem = (id) => {
-    const arrayFilter = cartItems.filter((item) => item.id !== id);
-    setCartItems(arrayFilter);
+    const filteredItems = cartItems.filter((item) => item.id !== id);
+    setCartItems(filteredItems);
   };
 
-  // Función para limpiar todos los elementos del carrito
-  const clearCartItems = () => {
-    setCartItems([]);
-  };
-
-  // Función para actualizar la cantidad de un elemento en el carrito
   const updateItemQuantity = (id, newQuantity) => {
-    const updatedCartItems = cartItems.map((item) =>
+    const updatedItems = cartItems.map((item) =>
       item.id === id ? { ...item, quantity: newQuantity, subTotal: newQuantity * item.price } : item
     );
-
-    setCartItems(updatedCartItems);
+    setCartItems(updatedItems);
   };
 
-  // Función para calcular el total de la compra
   const handleTotal = () => {
-    const total = cartItems.reduce((acum, item) => acum + item.subTotal, 0);
+    const total = cartItems.reduce((acc, item) => acc + item.subTotal, 0);
     setTotalCartItems(total);
   };
 
-  // Función para calcular la cantidad total de productos en el carrito
   const handleTotalQuantity = () => {
-    const total = cartItems.reduce((acum, item) => acum + item.quantity, 0);
+    const total = cartItems.reduce((acc, item) => acc + item.quantity, 0);
     setTotalQuantity(total);
   };
 
-  // Efecto para recalcular el total y la cantidad total cuando cambian los elementos del carrito
   useEffect(() => {
     handleTotal();
     handleTotalQuantity();
-  }, [cartItems]);
-
-  // Efecto para almacenar los elementos del carrito en el localStorage cuando cambian
-  useEffect(() => {
+    // Store to localStorage
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // Valor del contexto que contiene los estados y funciones necesarios para el carrito
   const contextValue = {
     cartItems,
     totalCartItems,
     totalQuantity,
     addItem,
     removeItem,
-    clearCartItems,
     updateItemQuantity,
+    // Include any other context state or functions you want to provide
   };
 
   return <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>;
 };
+
