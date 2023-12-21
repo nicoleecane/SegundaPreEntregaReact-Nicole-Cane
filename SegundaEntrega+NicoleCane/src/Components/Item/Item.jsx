@@ -1,24 +1,15 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 
 export const Item = ({ id, name, img, description }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
   const { addItem } = useCart();
   const onAdd = (items) => {
-    addItem(
-      {
-        id,
-        name,
-        price,
-      },
-      items
-    );
-  };
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+    addItem({
+      id,
+      name,
+      price,
+      items,
+    });
   };
 
   return (
@@ -34,11 +25,7 @@ export const Item = ({ id, name, img, description }) => {
             </button>
           </Link>
         </div>
-       
       </div>
-      
     </div>
   );
 };
-
-

@@ -1,14 +1,14 @@
-
-import { Item } from "../Item/Item"
-export const ItemList = ({products}) => {
+import { Item } from "../Item/Item";
+export const ItemList = ({ products }) => {
   return (
     <>
-    <div>
-    <div className="d-flex flex-wrap">
-
-        {products.map( product => <Item key={product.id} {...product}  />)}
-    </div>
-    </div>
+      <div>
+        <div className="d-flex flex-wrap">
+          {products.map((product) => (
+            <Item key={product.id} {...product} />
+          ))}
+        </div>
+      </div>
     </>
-  )
-}
+  );
+};

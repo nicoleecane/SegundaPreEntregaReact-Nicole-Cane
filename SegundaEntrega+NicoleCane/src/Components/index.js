@@ -1,6 +1,6 @@
 export * from './Cart/Cart';
 export * from './CartWidget/CartWidget';
-export { default as ErrorBoundary } from './ErrorBoundary/ErrorBoundary';
+export * from './Form/Form';
 export * from './Item/Item';
 export * from './ItemCount/ItemCount';
 export * from './ItemDetail/ItemDetail';
@@ -8,3 +8,4 @@ export * from './ItemDetailContainer/ItemDetailContainer';
 export * from './ItemList/ItemList';
 export * from './ItemListContainer/ItemListContainer';
 export * from './NavBar/NavBar';
+export * from './Order/Order';

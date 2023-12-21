@@ -1,8 +1,16 @@
-import React from 'react';
+import React from "react";
 import { useCart } from "../../context/CartContext";
 import { ItemCount } from "../ItemCount/ItemCount";
 
-export const ItemDetail = ({ id, name, category, description, img, price, stock }) => {
+export const ItemDetail = ({
+  id,
+  name,
+  category,
+  description,
+  img,
+  price,
+  stock,
+}) => {
   const { addItem } = useCart();
 
   const onAdd = (quantity) => {
@@ -10,10 +18,10 @@ export const ItemDetail = ({ id, name, category, description, img, price, stock 
       id,
       name,
       img,
-      price: Number(price), // Ensure price is a number
+      price: Number(price),
       category,
       description,
-      quantity: Number(quantity) // Parse quantity as a number
+      quantity: Number(quantity),
     });
   };
 
@@ -22,6 +30,7 @@ export const ItemDetail = ({ id, name, category, description, img, price, stock 
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
+
           <img src={img} alt={`Image of ${name}`} className="card-img-top" />
           <p className="card-text">{description}</p>
           <p>Precio: {price}</p>
@@ -31,4 +40,3 @@ export const ItemDetail = ({ id, name, category, description, img, price, stock 
     </div>
   );
 };
-
