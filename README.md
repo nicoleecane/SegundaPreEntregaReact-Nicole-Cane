@@ -8,6 +8,9 @@ Este E-Commerece es un proyecto para el curso de React de CoderHouse
 - npm install
 - npm run dev
 
+## Carpeta donde se encuentra el proyecto
+- cd SegundaEntrega+NicoleCane
+
 ## Tecnologías 
 - React Js
 - Node
